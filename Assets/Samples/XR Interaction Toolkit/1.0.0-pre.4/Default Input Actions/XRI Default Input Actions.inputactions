@@ -324,6 +324,17 @@
                 },
                 {
                     "name": "",
+                    "id": "da73b2a9-76f9-46d1-add6-0e6fcf312dd7",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "487f4f2e-9e9b-49aa-b0f2-4037a24624f5",
                     "path": "<XRController>{LeftHand}/triggerPressed",
                     "interactions": "",
@@ -793,6 +804,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5683fe0e-49a3-4aa4-a977-a74860c88bcd",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
