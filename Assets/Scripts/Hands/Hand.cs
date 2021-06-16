@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    [SerializeField]
+    GameObject hitBox;
+
     Animator animator;
+    
 
     //Aqui puedo meter el hitbox de la mano despues
 
@@ -18,6 +22,7 @@ public class Hand : MonoBehaviour
     public void SetClosed(bool state)
     {
         animator.SetBool("Close", state);
+        hitBox.SetActive(state);
     }
 
 }

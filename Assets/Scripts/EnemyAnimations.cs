@@ -49,5 +49,10 @@ public class EnemyAnimations : MonoBehaviour
         animator.SetBool("isAtacking", true);
     }
 
+    public void Die()
+    {
+        animator.SetBool("isDeath", true);
+    }
+
 }
 

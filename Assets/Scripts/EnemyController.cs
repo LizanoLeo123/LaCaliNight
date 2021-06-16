@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
+    [SerializeField] EnemyAnimations animations;
 
     void Start()
     {
@@ -51,5 +52,13 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Hand"))
+        {
+            animations.Die();
+        }
     }
 }
