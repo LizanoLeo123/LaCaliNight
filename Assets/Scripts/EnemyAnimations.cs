@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyAnimations : MonoBehaviour
 {
+    public float fightRotation;
+
     public NavMeshAgent agent;
     public float wait;
 
@@ -46,6 +48,7 @@ public class EnemyAnimations : MonoBehaviour
     void Atack()
     {
         //Debug.Log("Atacking the player");
+        transform.localEulerAngles = new Vector3(0, fightRotation, 0);
         animator.SetBool("isAtacking", true);
     }
 
