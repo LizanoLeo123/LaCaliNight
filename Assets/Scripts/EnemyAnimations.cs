@@ -7,8 +7,13 @@ public class EnemyAnimations : MonoBehaviour
 {
     public float fightRotation;
 
+    public bool hitAnimation;
+
     public NavMeshAgent agent;
     public float wait;
+
+    [HideInInspector]
+    public bool aggressive;
 
     private Animator animator;
     bool couroutineStarted = false;
@@ -18,31 +23,36 @@ public class EnemyAnimations : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        aggressive = true;
     }
 
     void LateUpdate()
     {
-        if (agent.velocity == new Vector3(0, 0, 0))
+        if (aggressive)
         {
-            animator.SetBool("isWalking", false);
-            //if is in front of player
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (agent.velocity == new Vector3(0, 0, 0))
             {
-                //Debug.Log("Ready to hit the player");
-                if (!couroutineStarted)
+                animator.SetBool("isWalking", false);
+                //if is in front of player
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    couroutineStarted = true;
-                    Invoke("Atack", wait);
-                    couroutineStarted = false;
-                    animator.SetBool("isAtacking", false);
+                    //Debug.Log("Ready to hit the player");
+                    if (!couroutineStarted)
+                    {
+                        couroutineStarted = true;
+                        Invoke("Atack", wait);
+                        couroutineStarted = false;
+                        animator.SetBool("isAtacking", false);
+                    }
                 }
             }
+            else
+            {
+                //Debug.Log("Walking");
+                animator.SetBool("isWalking", true);
+            }
         }
-        else
-        {
-            //Debug.Log("Walking");
-            animator.SetBool("isWalking", true);
-        }
+        
     }
 
     void Atack()
@@ -52,9 +62,27 @@ public class EnemyAnimations : MonoBehaviour
         animator.SetBool("isAtacking", true);
     }
 
+    public void ForceIdle()
+    {
+        animator.SetBool("isAtacking", false);
+        aggressive = false;
+    }
+
     public void Die()
     {
         animator.SetBool("isDeath", true);
+    }
+
+    public void ShowHitAnimation()
+    {
+        animator.SetBool("isHit", true);
+        StartCoroutine(FinishHitAnimation());
+    }
+
+    IEnumerator FinishHitAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.SetBool("isHit", false);
     }
 
 }

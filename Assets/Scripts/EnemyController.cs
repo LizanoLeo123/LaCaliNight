@@ -5,15 +5,21 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public int lifes;
+    
     public float lookRadius = 30f;
     Transform target;
     NavMeshAgent agent;
     [SerializeField] EnemyAnimations animations;
 
+    private bool inmune;
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        lifes = 5;
+        inmune = false;
     }
 
     // Update is called once per frame
@@ -56,9 +62,46 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hand"))
+        if (animations.aggressive)
         {
-            animations.Die();
+            if (other.CompareTag("Hand"))
+            {
+                if (!inmune)
+                {
+                    lifes--;
+                    inmune = true;
+
+                    if (animations.hitAnimation)
+                    {
+                        animations.ShowHitAnimation();
+                    }
+
+                    StartCoroutine(QuitInmunity());
+
+                    if (lifes <= 0)
+                    {
+                        animations.Die();
+                        StartCoroutine(DeleteObject());
+                    }
+                }
+            }
         }
+    }
+
+    public void ForceIdle()
+    {
+        animations.ForceIdle();
+    }
+
+    IEnumerator QuitInmunity()
+    {
+        yield return new WaitForSeconds(2f);
+        inmune = false;
+    }
+
+    IEnumerator DeleteObject()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 }
