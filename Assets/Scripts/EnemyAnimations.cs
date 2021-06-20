@@ -65,6 +65,8 @@ public class EnemyAnimations : MonoBehaviour
     public void ForceIdle()
     {
         animator.SetBool("isAtacking", false);
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isWalking", false);
         aggressive = false;
     }
 
