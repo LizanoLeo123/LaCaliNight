@@ -71,10 +71,7 @@ public class EnemyController : MonoBehaviour
                     lifes--;
                     inmune = true;
 
-                    if (animations.hitAnimation)
-                    {
-                        animations.ShowHitAnimation();
-                    }
+                    animations.ShowHitAnimation();
 
                     StartCoroutine(QuitInmunity());
 
