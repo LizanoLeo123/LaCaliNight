@@ -7,8 +7,6 @@ public class EnemyAnimations : MonoBehaviour
 {
     public float fightRotation;
 
-    public bool hitAnimation;
-
     public NavMeshAgent agent;
     public float wait;
 
