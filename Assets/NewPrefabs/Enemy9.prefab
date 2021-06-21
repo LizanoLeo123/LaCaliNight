@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 6342482625609186653}
   m_Layer: 0
   m_Name: Enemy9
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02aff2d58c084854f9dd685085ae6245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifes: 0
   lookRadius: 512
+  animations: {fileID: 6342482626781509498}
 --- !u!1 &6342482625679086523
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,8 +598,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6342482625811244266}
-  m_LocalRotation: {x: -0.000000032200603, y: -0.0021495824, z: -0.00000036814814,
-    w: 0.9999977}
+  m_LocalRotation: {x: -0.000000032200603, y: -0.0021495824, z: -0.00000036814814, w: 0.9999977}
   m_LocalPosition: {x: -1.6803964e-10, y: 0.23180373, z: -2.5595198e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1475,9 +1476,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6342482626721522758}
+  - component: {fileID: 232452744}
   m_Layer: 0
   m_Name: mixamorig:RightToeBase
-  m_TagString: Untagged
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1497,6 +1499,19 @@ Transform:
   m_Father: {fileID: 6342482625495326721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &232452744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342482626721522759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10000101, y: 0.25817698, z: 0.5929165}
+  m_Center: {x: 0.00000003756161, y: -0.07908659, z: 0.24645823}
 --- !u!1 &6342482626765146188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,8 +1639,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e0dad52d98eac4dbb1f0738b49384f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fightRotation: -14
+  hitAnimation: 1
   agent: {fileID: 6342482625609186655}
   wait: 5
+  aggressive: 0
 --- !u!1 &6342482626797392919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,6 +2123,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
