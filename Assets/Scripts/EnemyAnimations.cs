@@ -13,7 +13,7 @@ public class EnemyAnimations : MonoBehaviour
     [HideInInspector]
     public bool aggressive;
 
-    private Animator animator;
+    public Animator animator;
     bool couroutineStarted = false;
 
 

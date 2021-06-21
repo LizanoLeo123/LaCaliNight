@@ -14,12 +14,17 @@ public class EnemyController : MonoBehaviour
 
     private bool inmune;
 
+    private static AudioSource source;
+    [SerializeField] AudioClip[] punchClips;
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         lifes = 5;
         inmune = false;
+        source = GetComponent<AudioSource>();
+       
     }
 
     // Update is called once per frame
@@ -54,6 +59,12 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
+    private void PlayPunchSound()
+    {
+        int punchIndex = Random.Range(0, punchClips.Length);
+        AudioClip punch = punchClips[punchIndex];
+        source.PlayOneShot(punch);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -65,9 +76,10 @@ public class EnemyController : MonoBehaviour
         if (animations.aggressive)
         {
             if (other.CompareTag("Hand"))
-            {
+            {                            
                 if (!inmune)
                 {
+                    PlayPunchSound();
                     lifes--;
                     inmune = true;
 
