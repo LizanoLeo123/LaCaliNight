@@ -22,6 +22,7 @@ public class EnemyAnimations : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         aggressive = true;
+        animator.SetBool("isWalking", true);
     }
 
     void LateUpdate()
