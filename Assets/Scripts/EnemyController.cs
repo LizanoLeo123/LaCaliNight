@@ -12,17 +12,22 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     [SerializeField] EnemyAnimations animations;
 
+    private GameManager gameManager;
+
     private bool inmune;
+    private bool death;
 
     private static AudioSource source;
     [SerializeField] AudioClip[] punchClips;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         lifes = 5;
         inmune = false;
+        death = false;
         source = GetComponent<AudioSource>();
        
     }
@@ -77,7 +82,7 @@ public class EnemyController : MonoBehaviour
         {
             if (other.CompareTag("Hand"))
             {                            
-                if (!inmune)
+                if (!inmune && !death)
                 {
                     PlayPunchSound();
                     lifes--;
@@ -89,8 +94,10 @@ public class EnemyController : MonoBehaviour
 
                     if (lifes <= 0)
                     {
+                        death = true;
                         animations.Die();
                         StartCoroutine(DeleteObject());
+                        gameManager.DefeatEnemy();
                     }
                 }
             }

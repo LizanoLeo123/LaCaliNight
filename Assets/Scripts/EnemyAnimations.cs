@@ -7,8 +7,6 @@ public class EnemyAnimations : MonoBehaviour
 {
     public float fightRotation;
 
-    public bool hitAnimation;
-
     public NavMeshAgent agent;
     public float wait;
 
@@ -24,6 +22,7 @@ public class EnemyAnimations : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         aggressive = true;
+        animator.SetBool("isWalking", true);
     }
 
     void LateUpdate()
