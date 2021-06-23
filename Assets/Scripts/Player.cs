@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             if (!inmune && !death)
             {
                 int index = Random.Range(0, soundFX.Length);
-                AudioSource.PlayClipAtPoint(soundFX[index], transform.position, 0.5f);
+                AudioSource.PlayClipAtPoint(soundFX[index], transform.position, 0.2f);
                 CameraShaker.Instance.ShakeOnce(10f, 10f, .1f, 1f);
                 hits--;
                 Debug.Log("Remaining hits " + hits);

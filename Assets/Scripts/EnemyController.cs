@@ -107,6 +107,8 @@ public class EnemyController : MonoBehaviour
     public void ForceIdle()
     {
         animations.ForceIdle();
+        Transform idlePoint = GameObject.Find("IdlePoint").transform;
+        agent.SetDestination(idlePoint.position);
     }
 
     IEnumerator QuitInmunity()

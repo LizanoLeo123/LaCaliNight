@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 
     private bool next;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool finished;
 
     // Start is called before the first frame update
