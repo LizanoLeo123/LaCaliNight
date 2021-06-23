@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 {
     public int hits = 10;
 
+    public AudioClip[] soundFX;
+
     public GameObject damageVolume;
     public GameObject deathVolume;
 
@@ -18,8 +20,11 @@ public class Player : MonoBehaviour
     private LensDistortion ld;
     private bool growing;
 
+    public bool drunk;
     private bool inmune;
     private bool death = false;
+
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +32,7 @@ public class Player : MonoBehaviour
         vol.profile.TryGet<LensDistortion>(out ld);
         ld.intensity.value = 0;
         growing = true;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,20 +40,27 @@ public class Player : MonoBehaviour
     {
         if (!death)
         {
-            if (ld.intensity.value > max)
-                growing = false;
-            if (ld.intensity.value < min)
-                growing = true;
-
-            if (growing)
+            if (drunk) //Drunk effect condition
             {
-                //ld.intensity.value = Mathf.Lerp(ld.intensity.value, 1, 0.3f * Time.deltaTime);
-                ld.intensity.value = Mathf.Lerp(ld.intensity.value, 0.7f, Time.deltaTime / 2);
+                if (ld.intensity.value > max)
+                    growing = false;
+                if (ld.intensity.value < min)
+                    growing = true;
+
+                if (growing)
+                {
+                    //ld.intensity.value = Mathf.Lerp(ld.intensity.value, 1, 0.3f * Time.deltaTime);
+                    ld.intensity.value = Mathf.Lerp(ld.intensity.value, 0.7f, Time.deltaTime / 2);
+                }
+                else
+                {
+                    //ld.intensity.value = Mathf.Lerp(ld.intensity.value, -1, 0.3f * Time.deltaTime);
+                    ld.intensity.value = Mathf.Lerp(ld.intensity.value, -0.7f, Time.deltaTime / 2);
+                }
             }
             else
             {
-                //ld.intensity.value = Mathf.Lerp(ld.intensity.value, -1, 0.3f * Time.deltaTime);
-                ld.intensity.value = Mathf.Lerp(ld.intensity.value, -0.7f, Time.deltaTime / 2);
+                ld.intensity.value = 0;
             }
         }
         else
@@ -62,6 +75,8 @@ public class Player : MonoBehaviour
         {
             if (!inmune && !death)
             {
+                int index = Random.Range(0, soundFX.Length);
+                AudioSource.PlayClipAtPoint(soundFX[index], transform.position, 0.2f);
                 CameraShaker.Instance.ShakeOnce(10f, 10f, .1f, 1f);
                 hits--;
                 Debug.Log("Remaining hits " + hits);
@@ -71,15 +86,10 @@ public class Player : MonoBehaviour
 
                 if(hits <= 0)
                 {
+                    gameManager.LoseGame();
                     death = true;
                     Debug.Log("Me Mori");
                     deathVolume.SetActive(true);
-                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                    foreach(GameObject enemy in enemies)
-                    {
-                        EnemyController controller = enemy.GetComponent<EnemyController>();
-                        controller.ForceIdle();
-                    }
                 }
             }
         }
