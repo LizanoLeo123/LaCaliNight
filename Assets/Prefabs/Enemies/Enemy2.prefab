@@ -9,7 +9,7 @@ BoxCollider:
   m_GameObject: {fileID: 45710472878648704}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.17007792, z: 0.1}
   m_Center: {x: -0.00000000702277, y: 0.092747316, z: 0.00000003138042}
@@ -85,6 +85,7 @@ MonoBehaviour:
   lifes: 0
   lookRadius: 512
   animations: {fileID: 7099482793152602427}
+  punchClips: []
 --- !u!54 &334479836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128,10 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fightRotation: -40
-  hitAnimation: 0
   agent: {fileID: 7099482792675580017}
   wait: 5
   aggressive: 0
+  animator: {fileID: 0}
 --- !u!1001 &7099482792416257615
 PrefabInstance:
   m_ObjectHideFlags: 0

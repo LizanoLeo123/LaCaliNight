@@ -120,9 +120,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hits: 10
+  soundFX: []
   damageVolume: {fileID: 0}
   deathVolume: {fileID: 0}
   vol: {fileID: 0}
+  drunk: 0
 --- !u!1 &907725886
 GameObject:
   m_ObjectHideFlags: 0
